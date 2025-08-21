@@ -1,686 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tesla — Электромобили будущего</title>
-  <meta name="description" content="Обзор моделей Tesla, ключевые технологии, сравнение характеристик и интерактивный калькулятор запаса хода." />
+  <meta charset="UTF-8">
+  <title>Бутилирование воздуха</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* ---------- CSS VARIABLES & THEME ---------- */
-    :root{
-      --bg: #0b0d10;
-      --panel: #12151a;
-      --text: #e8edf2;
-      --muted:#9aa7b4;
-      --accent:#e82127; /* Tesla red */
-      --accent-2:#00e5ff;
-      --ok:#27e86a;
-      --warn:#ffd166;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 14px;
-      --radius-sm: 10px;
-      --line: rgba(255,255,255,0.08);
-      --grad: radial-gradient(1200px 600px at 80% -10%, rgba(232,33,39,.25), transparent 60%),
-              radial-gradient(1000px 500px at 10% 120%, rgba(0,229,255,.15), transparent 60%);
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      color: #333;
     }
-    [data-theme="light"]{
-      --bg:#f6f7f9;
-      --panel:#ffffff;
-      --text:#0f141a;
-      --muted:#5c6b7a;
-      --line: rgba(16,18,20,.08);
-      --shadow: 0 10px 30px rgba(0,0,0,.10);
-      --grad: radial-gradient(1200px 600px at 80% -10%, rgba(232,33,39,.15), transparent 60%),
-              radial-gradient(1000px 500px at 10% 120%, rgba(0,229,255,.12), transparent 60%);
+    header {
+      background: linear-gradient(120deg, #6dd5fa, #2980b9);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
     }
-
-    /* ---------- BASE ---------- */
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      background-image: var(--grad);
-      background-attachment: fixed;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
     }
-    a{color: var(--accent)}
-    h1,h2,h3{line-height:1.2;margin:0 0 .4rem}
-    h2{font-size: clamp(1.5rem, 1.2rem + 2vw, 2.2rem)}
-    p{margin:0 0 1rem}
-    .container{width:min(1100px, 92vw); margin:0 auto}
-
-    /* ---------- HEADER ---------- */
-    header{
-      position: sticky; top:0; z-index: 50;
-      backdrop-filter: blur(8px);
-      background: color-mix(in srgb, var(--bg) 65%, transparent);
-      border-bottom: 1px solid var(--line);
+    header p {
+      font-size: 1.2em;
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:1rem; padding:.75rem 0;
+    section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
     }
-    .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:inherit}
-    .brand svg{width:26px;height:26px; fill: var(--accent)}
-    .brand strong{letter-spacing:.08em}
-    .nav a.link{color:inherit; text-decoration:none; padding:.5rem .8rem; border-radius: 999px}
-    .nav a.link:hover{background: var(--line)}
-    .theme-toggle{
-      appearance:none; border:1px solid var(--line); background:var(--panel); color:inherit;
-      padding:.5rem .8rem; border-radius:999px; cursor:pointer; box-shadow: var(--shadow);
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
     }
-
-    /* ---------- HERO ---------- */
-    .hero{
-      position: relative;
-      display:grid; grid-template-columns: 1.2fr .8fr; gap:2rem;
-      padding: clamp(2rem, 3vw, 3rem) 0 1rem;
-      align-items:center;
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
-    .hero-card{
-      background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 80%, transparent), var(--panel));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: clamp(1rem, 2vw, 2rem);
-      overflow:hidden;
-      position:relative;
-      isolation:isolate;
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
     }
-    .hero h1{
-      font-size: clamp(1.8rem, 1.2rem + 3.5vw, 3rem);
-      margin-bottom:.5rem
+    .card img {
+      width: 100%;
+      border-radius: 8px;
     }
-    .badge{
-      display:inline-flex; align-items:center; gap:.5rem;
-      background: color-mix(in srgb, var(--accent) 12%, transparent);
-      color: var(--text); border:1px solid var(--line);
-      padding:.35rem .7rem; border-radius:999px; font-weight:600;
+    .price-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
     }
-    .hero-visual{
-      position:relative; min-height: 320px;
-      border:1px solid var(--line); border-radius: var(--radius);
-      background: radial-gradient(80% 120% at 50% 10%, rgba(255,255,255,.06), transparent 60%),
-                  linear-gradient(180deg, color-mix(in srgb, var(--panel) 90%, transparent), var(--panel));
-      box-shadow: var(--shadow);
+    .price {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 1 1 250px;
+      text-align: center;
     }
-    .car{
-      position:absolute; inset:auto 0 0 0; margin:auto;
-      width:min(680px, 95%); aspect-ratio: 16/7;
-      filter: drop-shadow(0 40px 40px rgba(0,0,0,.45));
-      transform: translateY(4px);
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
     }
-    /* Simple outline “silhouette” SVG look */
-    .car svg{width:100%; height:100%}
-    .hero-stats{
-      display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1em;
     }
-    .chip{
-      background: color-mix(in srgb, var(--accent-2) 12%, transparent);
-      border:1px solid var(--line);
-      padding:.5rem .75rem; border-radius: 12px; font-weight:600
+    form button {
+      background: #2980b9;
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1em;
     }
-
-    /* ---------- MODELS GRID ---------- */
-    .section{padding: 2.5rem 0}
-    .cards{
-      display:grid; grid-template-columns: repeat(12, 1fr); gap: 1rem
+    form button:hover {
+      background: #1f6390;
     }
-    .card{
-      grid-column: span 4;
-      background: var(--panel); border:1px solid var(--line);
-      border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow);
-      display:flex; flex-direction:column;
-    }
-    .card .media{
-      background: linear-gradient(120deg, rgba(232,33,39,.18), rgba(0,229,255,.12));
-      aspect-ratio: 16/9; display:grid; place-items:center
-    }
-    .card h3{margin:.75rem 1rem 0}
-    .card p{margin:.3rem 1rem 1rem; color: var(--muted)}
-    .card .specs{
-      display:flex; gap:.5rem; flex-wrap:wrap; margin: 0 1rem 1rem
-    }
-    .spec{
-      padding:.35rem .55rem; border:1px solid var(--line); border-radius: 10px;
-      background: color-mix(in srgb, var(--panel) 85%, transparent);
-      font-size:.92rem
-    }
-    .card .cta{
-      margin: auto 1rem 1rem; display:flex; gap:.6rem; flex-wrap:wrap
-    }
-    .btn{
-      appearance:none; border:1px solid var(--line); background: var(--accent);
-      color:white; padding:.6rem .9rem; border-radius:999px; cursor:pointer; font-weight:700
-    }
-    .btn.secondary{
-      background: transparent; color: var(--text)
-    }
-    .btn:focus-visible{outline:2px solid var(--accent-2)}
-
-    /* ---------- COMPARISON TABLE ---------- */
-    .table-wrap{
-      background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
-      box-shadow: var(--shadow); overflow:auto
-    }
-    table{border-collapse:collapse; width:100%; min-width: 760px}
-    th,td{padding:.9rem .8rem; border-bottom:1px solid var(--line)}
-    th{position:sticky; top:0; background: color-mix(in srgb, var(--panel) 92%, transparent); text-align:left}
-    th button{
-      all:unset; cursor:pointer; font-weight:700; display:inline-flex; gap:.35rem; align-items:center
-    }
-    tbody tr:hover{background: color-mix(in srgb, var(--panel) 88%, transparent)}
-    .tag{font-size:.85rem; padding:.2rem .5rem; border:1px solid var(--line); border-radius:999px}
-
-    /* ---------- RANGE ESTIMATOR ---------- */
-    .estimator{
-      display:grid; grid-template-columns: 1.1fr .9fr; gap:1rem;
-      background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
-      box-shadow: var(--shadow); padding:1rem
-    }
-    .sliders label{display:block; font-weight:700; margin:.5rem 0 .25rem}
-    input[type="range"]{width:100%}
-    .gauge{
-      height: 220px; border:1px dashed var(--line); border-radius: var(--radius-sm);
-      display:grid; place-items:center; position:relative; overflow:hidden;
-      background:
-        radial-gradient(120% 120% at 50% 100%, color-mix(in srgb, var(--ok) 18%, transparent), transparent 50%),
-        radial-gradient(100% 80% at 50% 0%, color-mix(in srgb, var(--warn) 12%, transparent), transparent 45%);
-    }
-    .km{
-      font-size: clamp(2rem, 1rem + 4vw, 3.2rem); font-weight:900;
-      letter-spacing:.02em
-    }
-    .gauge small{color: var(--muted)}
-
-    /* ---------- GALLERY (Lightbox) ---------- */
-    .gallery{
-      display:grid; grid-template-columns: repeat(12,1fr); gap:.8rem
-    }
-    .thumb{grid-column: span 3; aspect-ratio: 4/3; border-radius: 12px; overflow:hidden; cursor:pointer; position:relative}
-    .thumb::after{
-      content:"Увеличить"; position:absolute; inset:auto .5rem .5rem auto;
-      background: color-mix(in srgb, var(--bg) 60%, transparent);
-      border:1px solid var(--line); padding:.2rem .5rem; border-radius:8px; font-size:.8rem
-    }
-    .thumb img{width:100%; height:100%; object-fit:cover; display:block; filter: saturate(1.1) contrast(1.05)}
-    .lightbox{
-      position: fixed; inset:0; background: rgba(0,0,0,.8);
-      display:none; align-items:center; justify-content:center; padding:2vw; z-index:100
-    }
-    .lightbox.open{display:flex}
-    .lightbox img{max-width: min(1100px, 92vw); max-height: 86vh; border-radius: 10px; box-shadow: var(--shadow)}
-    .lightbox button{
-      position:absolute; top:20px; right:20px; background: var(--panel); color:inherit;
-      border:1px solid var(--line); border-radius: 999px; padding:.5rem .8rem; cursor:pointer
-    }
-
-    /* ---------- TIMELINE ---------- */
-    .timeline{
-      position:relative; padding-left: 1rem; border-left: 2px dashed var(--line)
-    }
-    .tl-item{margin: 1rem 0 1.2rem}
-    .tl-item h4{margin:0 0 .25rem}
-    .tl-item time{color: var(--muted); font-size:.9rem}
-
-    /* ---------- FOOTER ---------- */
-    footer{border-top:1px solid var(--line); padding:1.5rem 0; color:var(--muted)}
-    .credits{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center}
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 960px){
-      .hero{grid-template-columns: 1fr; gap:1rem}
-      .estimator{grid-template-columns: 1fr}
-      .card{grid-column: span 6}
-      .thumb{grid-column: span 4}
-    }
-    @media (max-width: 640px){
-      .cards{gap:.8rem}
-      .card{grid-column: span 12}
-      .thumb{grid-column: span 6}
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #2980b9;
+      color: white;
     }
   </style>
 </head>
 <body>
-<header>
-  <div class="container nav" role="navigation" aria-label="Главная навигация">
-    <a class="brand" href="#top" aria-label="Tesla home">
-      <!-- Minimal Tesla-like T -->
-      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 16c8-6 16-9 24-9s16 3 24 9h-9c-4-3-9-5-15-5s-11 2-15 5H8zm25 8c0 10 2 22 7 30h-8c5-8 7-20 7-30h-6z"/></svg>
-      <strong>Tesla</strong>
-    </a>
-    <nav style="display:flex; gap:.25rem; align-items:center">
-      <a class="link" href="#models">Модели</a>
-      <a class="link" href="#compare">Сравнить</a>
-      <a class="link" href="#range">Запас хода</a>
-      <a class="link" href="#gallery">Галерея</a>
-      <a class="link" href="#timeline">История</a>
-      <button class="theme-toggle" id="themeBtn" aria-label="Переключить тему">🌗 Тема</button>
-    </nav>
-  </div>
-</header>
+  <header>
+    <h1>Бутилирование воздуха</h1>
+    <p>Сохраним запах вашей квартиры в банке, чтобы вы могли открыть её и вспомнить прошлое.</p>
+  </header>
 
-<main id="top" class="container">
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-card">
-      <span class="badge">⚡ 100% Электричество • Ноль выхлопа</span>
-      <h1 id="hero-title">Будущее в движении — Tesla</h1>
-      <p>Быстрые, тихие и умные. Tesla сочетает аэродинамику, программное обеспечение и батареи нового поколения, чтобы дарить драйв и дальность без компромиссов.</p>
-      <div class="hero-stats" aria-label="Ключевые показатели">
-        <div class="chip">0–100 км/ч: <b>2.1 c</b></div>
-        <div class="chip">Запас хода: <b>до 652 км</b></div>
-        <div class="chip">Автопилот: <b>FSD*</b></div>
-      </div>
-      <p style="color:var(--muted); font-size:.9rem; margin-top:.5rem">* Возможности зависят от страны и пакета функций.</p>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="car">
-        <!-- Simple stylized outline sedan -->
-        <svg viewBox="0 0 1200 520" fill="none" stroke="currentColor" stroke-width="8">
-          <defs>
-            <linearGradient id="c" x1="0" x2="1">
-              <stop offset="0" stop-color="var(--accent-2)"/>
-              <stop offset="1" stop-color="var(--accent)"/>
-            </linearGradient>
-          </defs>
-          <g stroke="url(#c)">
-            <path d="M70 340c40-110 210-170 460-175 180-3 320 30 410 60 50 17 110 35 160 40 30 3 60 25 50 60-12 44-72 48-118 49H150c-50 0-80-10-80-34 0-10 0-0 0 0z"/>
-            <circle cx="310" cy="400" r="70"/><circle cx="900" cy="400" r="70"/>
-            <path d="M260 280c40-70 120-110 210-115 130-7 255 30 365 115M540 210c10 0 50 0 60 0M720 210c50 0 110 0 160 0"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODELS -->
-  <section id="models" class="section" aria-labelledby="models-title">
-    <h2 id="models-title">Линейка моделей</h2>
-    <p style="color:var(--muted)">Выбери свой стиль: седан, кроссовер, суперкар или пикап с космическим характером.</p>
-    <div class="cards" role="list">
-      <!-- Reusable card template instances -->
-      <article class="card" role="listitem">
-        <div class="media" aria-hidden="true">
-          <svg viewBox="0 0 220 120" width="100%" height="100%">
-            <rect x="10" y="50" width="200" height="40" rx="10" fill="rgba(232,33,39,.4)"/>
-            <circle cx="60" cy="95" r="12" fill="white"/><circle cx="160" cy="95" r="12" fill="white"/>
-          </svg>
-        </div>
-        <h3>Model S</h3>
-        <p>Флагманский седан: дальность, премиум-салон и бескомпромиссная динамика.</p>
-        <div class="specs">
-          <span class="spec">до 652 км</span>
-          <span class="spec">0–100: 2.1 c</span>
-          <span class="spec">Dual/tri‑motor</span>
-        </div>
-        <div class="cta">
-          <a class="btn secondary" href="#compare">Сравнить</a>
-          <a class="btn" href="#range">Оценить запас хода</a>
-        </div>
-      </article>
-
-      <article class="card" role="listitem">
-        <div class="media" aria-hidden="true">
-          <svg viewBox="0 0 220 120" width="100%" height="100%">
-            <rect x="10" y="55" width="200" height="38" rx="11" fill="rgba(0,229,255,.35)"/>
-            <circle cx="60" cy="95" r="12" fill="white"/><circle cx="160" cy="95" r="12" fill="white"/>
-          </svg>
-        </div>
-        <h3>Model 3</h3>
-        <p>Доступный седан с высоким КПД и новейшими ассистентами водителя.</p>
-        <div class="specs">
-          <span class="spec">до 629 км</span>
-          <span class="spec">0–100: 3.3 c</span>
-          <span class="spec">RWD/AWD</span>
-        </div>
-        <div class="cta">
-          <a class="btn secondary" href="#compare">Сравнить</a>
-          <a class="btn" href="#range">Оценить запас хода</a>
-        </div>
-      </article>
-
-      <article class="card" role="listitem">
-        <div class="media" aria-hidden="true">
-          <svg viewBox="0 0 220 120" width="100%" height="100%">
-            <rect x="10" y="48" width="200" height="46" rx="12" fill="rgba(232,33,39,.35)"/>
-            <circle cx="60" cy="98" r="12" fill="white"/><circle cx="160" cy="98" r="12" fill="white"/>
-          </svg>
-        </div>
-        <h3>Model X</h3>
-        <p>Кроссовер с дверями «крыло сокола», семейный комфорт и быстрый заряд.</p>
-        <div class="specs">
-          <span class="spec">до 560 км</span>
-          <span class="spec">0–100: 3.1 c</span>
-          <span class="spec">7 мест</span>
-        </div>
-        <div class="cta">
-          <a class="btn secondary" href="#compare">Сравнить</a>
-          <a class="btn" href="#range">Оценить запас хода</a>
-        </div>
-      </article>
-
-      <article class="card" role="listitem">
-        <div class="media" aria-hidden="true">
-          <svg viewBox="0 0 220 120" width="100%" height="100%">
-            <rect x="10" y="60" width="200" height="36" rx="10" fill="rgba(0,229,255,.30)"/>
-            <circle cx="60" cy="95" r="12" fill="white"/><circle cx="160" cy="95" r="12" fill="white"/>
-          </svg>
-        </div>
-        <h3>Model Y</h3>
-        <p>Городской кроссовер: вместительность и экономичность в одном кузове.</p>
-        <div class="specs">
-          <span class="spec">до 533 км</span>
-          <span class="spec">0–100: 5.0 c</span>
-          <span class="spec">AWD</span>
-        </div>
-        <div class="cta">
-          <a class="btn secondary" href="#compare">Сравнить</a>
-          <a class="btn" href="#range">Оценить запас хода</a>
-        </div>
-      </article>
-
-      <article class="card" role="listitem">
-        <div class="media" aria-hidden="true">
-          <svg viewBox="0 0 220 120" width="100%" height="100%">
-            <polygon points="12,92 208,92 192,58 28,58" fill="rgba(232,33,39,.28)"/>
-            <circle cx="60" cy="95" r="12" fill="white"/><circle cx="160" cy="95" r="12" fill="white"/>
-          </svg>
-        </div>
-        <h3>Cybertruck</h3>
-        <p>Угловатый пикап из нержавейки с огромным моментом и полезной нагрузкой.</p>
-        <div class="specs">
-          <span class="spec">тяга до 6 т</span>
-          <span class="spec">0–100: ~2.7 c</span>
-          <span class="spec">AWD</span>
-        </div>
-        <div class="cta">
-          <a class="btn secondary" href="#compare">Сравнить</a>
-          <a class="btn" href="#range">Оценить запас хода</a>
-        </div>
-      </article>
-
-      <article class="card" role="listitem">
-        <div class="media" aria-hidden="true">
-          <svg viewBox="0 0 220 120" width="100%" height="100%">
-            <rect x="10" y="44" width="200" height="50" rx="14" fill="rgba(0,229,255,.26)"/>
-            <circle cx="60" cy="96" r="12" fill="white"/><circle cx="160" cy="96" r="12" fill="white"/>
-          </svg>
-        </div>
-        <h3>Roadster</h3>
-        <p>Электрический суперкар нового поколения — про ускорение и аэродинамику.</p>
-        <div class="specs">
-          <span class="spec">0–100: <b>&lt;2 c</b></span>
-          <span class="spec">Макс. скорость 400+ км/ч*</span>
-          <span class="spec">AWD</span>
-        </div>
-        <div class="cta">
-          <a class="btn secondary" href="#compare">Сравнить</a>
-          <a class="btn" href="#range">Оценить запас хода</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- COMPARISON -->
-  <section id="compare" class="section" aria-labelledby="cmp-title">
-    <h2 id="cmp-title">Сравнение характеристик</h2>
-    <p style="color:var(--muted)">Нажми на заголовок колонки, чтобы отсортировать. Данные условные для демонстрации интерфейса.</p>
-    <div class="table-wrap" role="region" aria-label="Таблица сравнения моделей Tesla">
-      <table id="cmp">
-        <thead>
-          <tr>
-            <th><button data-key="model">Модель ▲</button></th>
-            <th><button data-key="range">Запас хода (км)</button></th>
-            <th><button data-key="accel">0–100 (с)</button></th>
-            <th><button data-key="top">Макс. скорость</button></th>
-            <th><button data-key="price">Цена*</button></th>
-            <th>Примечание</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <p style="color:var(--muted); font-size:.9rem">* Цены и спецификации различаются по рынкам и комплектациям.</p>
-  </section>
-
-  <!-- RANGE ESTIMATOR -->
-  <section id="range" class="section" aria-labelledby="range-title">
-    <h2 id="range-title">Калькулятор запаса хода</h2>
-    <div class="estimator" role="group" aria-label="Оценка дальности хода">
-      <div class="sliders">
-        <label for="modelSelect">Модель</label>
-        <select id="modelSelect" aria-label="Выбор модели"></select>
-
-        <label for="speed">Скорость (км/ч): <span id="speedVal">90</span></label>
-        <input id="speed" type="range" min="40" max="150" value="90"/>
-
-        <label for="temp">Температура воздуха (°C): <span id="tempVal">20</span></label>
-        <input id="temp" type="range" min="-20" max="40" value="20"/>
-
-        <label for="wheels">Размер колёс (дюймы): <span id="wheelsVal">19</span></label>
-        <input id="wheels" type="range" min="18" max="22" value="19"/>
-      </div>
-      <div class="gauge" aria-live="polite">
-        <div class="km" id="km">— км</div>
-        <small id="rangeNote">Оценка на основе упрощённой модели сопротивления и климата</small>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery" class="section" aria-labelledby="gal-title">
-    <h2 id="gal-title">Галерея</h2>
-    <p style="color:var(--muted)">Кликни для увеличения. Изображения — placeholder‑демо (градиенты и формы).</p>
+  <section>
+    <h2>Примеры работ</h2>
     <div class="gallery">
-      <!-- 8 gradient demo thumbs -->
-      <div class="thumb"><img alt="Силуэт седана на градиенте" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23ff4050'/><stop offset='1' stop-color='%2300e5ff'/></linearGradient></defs><rect width='800' height='600' fill='url(%23g)'/><rect x='80' y='320' width='640' height='90' rx='30' fill='rgba(255,255,255,.5)'/><circle cx='230' cy='430' r='28' fill='white'/><circle cx='570' cy='430' r='28' fill='white'/></svg>"></div>
-      <div class="thumb"><img alt="Минимализм — линия кузова" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%2312141a'/><path d='M80 350 C200 260, 420 230, 720 300' stroke='%23e82127' stroke-width='10' fill='none'/></svg>"></div>
-      <div class="thumb"><img alt="Колесо крупным планом" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><defs><radialGradient id='r'><stop offset='0' stop-color='%23fff'/><stop offset='1' stop-color='%230b0d10'/></radialGradient></defs><rect width='800' height='600' fill='%230b0d10'/><circle cx='400' cy='300' r='160' fill='url(%23r)'/></svg>"></div>
-      <div class="thumb"><img alt="Салон — абстракция" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%23ffffff'/><rect x='120' y='160' width='560' height='280' rx='18' fill='%23f0f3f6' stroke='%23e2e8f0'/></svg>"></div>
-      <div class="thumb"><img alt="Профиль кроссовера" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%2300e5ff'/><rect x='100' y='340' width='600' height='80' rx='16' fill='rgba(0,0,0,.2)'/><circle cx='240' cy='430' r='26' fill='%230b0d10'/><circle cx='560' cy='430' r='26' fill='%230b0d10'/></svg>"></div>
-      <div class="thumb"><img alt="Cybertruck — полигоны" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%23f6f7f9'/><polygon points='120,420 680,420 640,340 160,340' fill='%23cbd5e1'/></svg>"></div>
-      <div class="thumb"><img alt="Деталь фары" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><rect width='800' height='600' fill='%2312141a'/><rect x='220' y='260' width='360' height='40' rx='20' fill='%2300e5ff'/></svg>"></div>
-      <div class="thumb"><img alt="Roadster — скорость" src="data:image/svg+xml;utf8,<?xml version='1.0'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><defs><linearGradient id='g2' x1='0' x2='1'><stop offset='0' stop-color='%2300e5ff'/><stop offset='1' stop-color='%23e82127'/></linearGradient></defs><rect width='800' height='600' fill='url(%23g2)'/><path d='M80 340 Q 400 220, 720 340' stroke='%23fff' stroke-width='8' fill='none' /></svg>"></div>
-    </div>
-
-    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Просмотр изображения">
-      <button id="lbClose" aria-label="Закрыть">✕</button>
-      <img alt="Увеличенное изображение" id="lbImg" src="">
-    </div>
-  </section>
-
-  <!-- TIMELINE -->
-  <section id="timeline" class="section" aria-labelledby="tl-title">
-    <h2 id="tl-title">Короткая история Tesla</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <time datetime="2008">2008</time>
-        <h4>Первый Roadster</h4>
-        <p>Доказал, что электромобиль может быть быстрым и желанным.</p>
+      <div class="card">
+        <img src="https://picsum.photos/400/250?random=1" alt="Банка воздуха">
+        <p>Воздух из квартиры №12, март 2023</p>
       </div>
-      <div class="tl-item">
-        <time datetime="2012">2012</time>
-        <h4>Model S</h4>
-        <p>Седан с большим запасом хода, обновляемый «по воздуху».</p>
+      <div class="card">
+        <img src="https://picsum.photos/400/250?random=2" alt="Банка воздуха">
+        <p>Аромат утреннего кофе, кухня семьи Ивановых</p>
       </div>
-      <div class="tl-item">
-        <time datetime="2015">2015</time>
-        <h4>Autopilot</h4>
-        <p>Набор продвинутых ассистентов вождения и OTA‑обновления.</p>
-      </div>
-      <div class="tl-item">
-        <time datetime="2020">2020</time>
-        <h4>Gigafactory</h4>
-        <p>Масштабирование производства батарей и автомобилей по миру.</p>
-      </div>
-      <div class="tl-item">
-        <time datetime="2023">2023+</time>
-        <h4>Cybertruck и далее</h4>
-        <p>Новые форм‑факторы и эксперименты с материалами и дизайном.</p>
+      <div class="card">
+        <img src="https://picsum.photos/400/250?random=3" alt="Банка воздуха">
+        <p>Детская комната, игрушки и запах детства</p>
       </div>
     </div>
   </section>
 
-  <!-- “FIVE” TOUCH -->
-  <section class="section" aria-labelledby="five-title">
-    <h2 id="five-title">5 ключевых идей Tesla</h2>
-    <ul>
-      <li><b>Батареи</b> высокого удельного энергоёмкого класса.</li>
-      <li><b>ПО‑платформа</b> и OTA‑обновления.</li>
-      <li><b>Аэродинамика</b> и минимализм в дизайне.</li>
-      <li><b>Суперчарджеры</b> и инфраструктура.</li>
-      <li><b>Вертикальная интеграция</b> от ячейки до сервиса.</li>
-    </ul>
+  <section>
+    <h2>Наши цены</h2>
+    <div class="price-list">
+      <div class="price">
+        <h3>Стандарт</h3>
+        <p>1 банка (0.5 л)</p>
+        <strong>500 ₽</strong>
+      </div>
+      <div class="price">
+        <h3>Семейный</h3>
+        <p>3 банки (по 1 л)</p>
+        <strong>1200 ₽</strong>
+      </div>
+      <div class="price">
+        <h3>Премиум</h3>
+        <p>10 банок (по 1.5 л)</p>
+        <strong>3500 ₽</strong>
+      </div>
+    </div>
   </section>
-</main>
 
-<footer>
-  <div class="container credits">
-    <span>© Tesla Fanpage • Учебный демо‑сайт (без аффилиации).</span>
-    <span>Сделано на HTML + CSS + JS.</span>
-  </div>
-</footer>
+  <section>
+    <h2>Заказать услугу</h2>
+    <form id="orderForm">
+      <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" placeholder="Телефон" required>
+      <textarea name="address" placeholder="Адрес для визита" required></textarea>
+      <button type="submit">Отправить заявку</button>
+    </form>
+  </section>
 
-<script>
-  // ---------- THEME ----------
-  const root = document.documentElement;
-  const themeBtn = document.getElementById('themeBtn');
-  const saved = localStorage.getItem('theme');
-  if(saved) root.setAttribute('data-theme', saved);
-  themeBtn.addEventListener('click', ()=>{
-    const next = root.getAttribute('data-theme') === 'light' ? '' : 'light';
-    if(next) root.setAttribute('data-theme', next); else root.removeAttribute('data-theme');
-    localStorage.setItem('theme', next);
-  });
+  <footer>
+    <p>© 2025 Бутилирование воздуха. Все права защищены.</p>
+  </footer>
 
-  // ---------- COMPARISON DATA ----------
-  const data = [
-    {model:'Model S', range:652, accel:2.1, top:'322 км/ч', price:'$$$', note:'Дальнобой + динамика'},
-    {model:'Model 3', range:629, accel:3.3, top:'261 км/ч', price:'$$', note:'Лучший КПД'},
-    {model:'Model X', range:560, accel:3.1, top:'262 км/ч', price:'$$$', note:'7 мест'},
-    {model:'Model Y', range:533, accel:5.0, top:'217 км/ч', price:'$$', note:'Практичность'},
-    {model:'Cybertruck', range:515, accel:2.7, top:'210 км/ч', price:'$$$', note:'Грузоподъёмность'},
-    {model:'Roadster', range:1000, accel:1.9, top:'400+ км/ч', price:'$$$$', note:'Концепт/пред‑prod'}
-  ];
-  const tbody = document.querySelector('#cmp tbody');
-  let sortKey = 'model';
-  let asc = true;
+  <script>
+    const BOT_TOKEN = "8125871726:AAFuLvWG17bzqZUwJAFl0ISYjNIf1utxNX8";  // замените на токен вашего бота
+    const CHAT_ID = "8469802684";  // замените на ID чата/канала
 
-  function renderTable(){
-    const rows = [...data].sort((a,b)=>{
-      const A = a[sortKey], B = b[sortKey];
-      if(typeof A === 'number' && typeof B === 'number') return asc ? A-B : B-A;
-      return asc ? String(A).localeCompare(String(B)) : String(B).localeCompare(String(A));
-    }).map(row=>`
-      <tr>
-        <td><strong>${row.model}</strong></td>
-        <td>${row.range}</td>
-        <td>${row.accel.toFixed(1)}</td>
-        <td>${row.top}</td>
-        <td><span class="tag">${row.price}</span></td>
-        <td>${row.note}</td>
-      </tr>
-    `).join('');
-    tbody.innerHTML = rows;
-    // Update header arrow
-    document.querySelectorAll('th button').forEach(b=>{
-      b.textContent = b.dataset.key === sortKey ? b.textContent.replace(/▲|▼/g,'') + (asc?' ▲':' ▼')
-                                                 : b.textContent.replace(/ ▲| ▼/g,'');
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const message = `
+📦 Новая заявка:
+👤 Имя: ${formData.get("name")}
+📞 Телефон: ${formData.get("phone")}
+🏠 Адрес: ${formData.get("address")}
+      `;
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
+      })
+      .then(res => res.json())
+      .then(res => {
+        if(res.ok){
+          alert("Заявка отправлена! Мы скоро свяжемся с вами.");
+          document.getElementById("orderForm").reset();
+        } else {
+          alert("Ошибка отправки: " + res.description);
+        }
+      })
+      .catch(err => alert("Ошибка соединения: " + err));
     });
-  }
-  renderTable();
-
-  document.querySelectorAll('th button').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const key = btn.dataset.key;
-      if(sortKey === key){ asc = !asc } else { sortKey = key; asc = true }
-      renderTable();
-    });
-  });
-
-  // ---------- RANGE ESTIMATOR ----------
-  const baseWhPerKm = { // Условные базовые удельные затраты
-    'Model S': 150, 'Model 3': 130, 'Model X': 190, 'Model Y': 170, 'Cybertruck': 240, 'Roadster': 160
-  };
-  const batteryKwh = {    // Условные емкости батарей
-    'Model S': 100, 'Model 3': 75, 'Model X': 100, 'Model Y': 79, 'Cybertruck': 123, 'Roadster': 200
-  };
-
-  const modelSelect = document.getElementById('modelSelect');
-  Object.keys(baseWhPerKm).forEach(m=>{
-    const o = document.createElement('option'); o.value = m; o.textContent = m; modelSelect.appendChild(o);
-  });
-  modelSelect.value = 'Model 3';
-
-  const speed = document.getElementById('speed');
-  const temp = document.getElementById('temp');
-  const wheels = document.getElementById('wheels');
-  const speedVal = document.getElementById('speedVal');
-  const tempVal = document.getElementById('tempVal');
-  const wheelsVal = document.getElementById('wheelsVal');
-  const kmOut = document.getElementById('km');
-  const note = document.getElementById('rangeNote');
-
-  function estimate(){
-    speedVal.textContent = speed.value;
-    tempVal.textContent = temp.value;
-    wheelsVal.textContent = wheels.value;
-
-    const model = modelSelect.value;
-    const whpk = baseWhPerKm[model];
-
-    // Простая модель: расход растёт квадратично от аэродинамики со скоростью,
-    // ухудшается на холоде, и немного растёт с диаметром колеса.
-    const v = +speed.value;
-    const T = +temp.value;
-    const W = +wheels.value;
-
-    const aero = 1 + Math.pow((v-90)/100, 2);         // базовый минимум на ~90 км/ч
-    const climate = 1 + (T < 5 ? (5 - T)/40 : 0) + (T > 30 ? (T-30)/80 : 0);
-    const wheel = 1 + (W - 19) * 0.02;
-
-    const whPerKm = whpk * aero * climate * wheel;
-    const usableKwh = batteryKwh[model] * 0.94;       // резерв на буфер
-    const rangeKm = Math.max(120, Math.round((usableKwh * 1000) / whPerKm));
-
-    kmOut.textContent = rangeKm.toLocaleString('ru-RU') + ' км';
-    const hints = [];
-    if(v>120) hints.push('Снизь скорость');
-    if(T<0) hints.push('Подогрев/тепловой насос');
-    if(W>20) hints.push('Меньше сопротивление колёс');
-    note.textContent = hints.length ? 'Совет: ' + hints.join(' • ') : 'Оптимальные условия.';
-  }
-  ['input','change'].forEach(evt=>{
-    speed.addEventListener(evt, estimate);
-    temp.addEventListener(evt, estimate);
-    wheels.addEventListener(evt, estimate);
-    modelSelect.addEventListener(evt, estimate);
-  });
-  estimate();
-
-  // ---------- GALLERY LIGHTBOX ----------
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lbImg');
-  const lbClose = document.getElementById('lbClose');
-  document.querySelectorAll('.thumb img').forEach(img=>{
-    img.addEventListener('click', ()=>{
-      lbImg.src = img.src;
-      lb.classList.add('open');
-    });
-  });
-  lbClose.addEventListener('click', ()=> lb.classList.remove('open'));
-  lb.addEventListener('click', (e)=> { if(e.target === lb) lb.classList.remove('open') });
-
-  // ---------- ACCESSIBILITY: skip focus ring on mouse only ----------
-  function handleFirstTab(e){
-    if(e.key === 'Tab'){ document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab) }
-  }
-  window.addEventListener('keydown', handleFirstTab);
-</script>
+  </script>
 </body>
 </html>
